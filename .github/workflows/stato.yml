@@ -1,0 +1,114 @@
+# =============================================================================
+# COME STA IL SITO DELLA CHIESA — il controllo ogni 10 minuti.
+#
+# QUESTO FILE NON VA IN VIDEOHUB. Va nel repository PUBBLICO «stato», con il
+# nome  .github/workflows/stato.yml  (vedi stato/LEGGIMI.md, passo 4). Qui in
+# VideoHub sta solo perche' cosi' ha una storia e una prova.
+#
+# Che cosa fa, ogni 10 minuti circa (e quando lo si fa partire a mano da
+# Actions → «Stato del sito» → Run workflow):
+#   1. prende i file del repository (controlla.mjs e lo stato.json salvato);
+#   2. fa girare  node controlla.mjs, che chiede al sito se risponde e scrive
+#      la pagina nella cartella _site;
+#   3. SOLO se e' cambiato qualcosa che conta (il sito e' caduto o tornato, o
+#      il titolo, il canale, gli orari) o sono passate sei ore, salva
+#      stato.json nel repository, a nome di github-actions;
+#   4. pubblica _site su GitHub Pages.
+#
+# [DECISO] SI PUBBLICA CON actions/deploy-pages, NON «Deploy from a branch».
+# La pagina scrive l'ora dell'ultimo controllo, quindi cambia a OGNI giro:
+# pubblicandola da un ramo servirebbe un commit ogni dieci minuti (144 al
+# giorno, tutti uguali tranne l'ora) — proprio quello che non si vuole. Con
+# deploy-pages la pagina fresca si pubblica senza commit, e il repository
+# riceve un commit solo quando serve davvero. In piu': i commit fatti col
+# gettone del workflow non fanno partire altri workflow, e con la pubblicazione
+# da un ramo non si e' mai sicuri che la pagina si rifaccia; e il limite di
+# GitHub di 10 pubblicazioni all'ora vale per i rami, non per deploy-pages.
+# Il prezzo sono due permessi in piu' (pages e id-token, qui sotto), che
+# servono SOLO a pubblicare le pagine di questo repository.
+#
+# Lo storico fra un salvataggio e l'altro non si perde: all'inizio di ogni giro
+# controlla.mjs rilegge lo stato.json GIA' PUBBLICATO (e' pubblico comunque) e
+# lo unisce a quello salvato.
+#
+# [ATTENZIONE] GitHub non garantisce i 10 minuti: nei momenti di traffico (e
+# soprattutto allo scoccare dell'ora) un giro puo' partire in ritardo o
+# saltare. Per questo i minuti sono 3, 13, 23... e non 0, 10, 20; e la pagina
+# scrive sempre l'ora VERA dell'ultimo controllo, e avvisa se e' vecchia.
+# [ATTENZIONE] In un repository pubblico GitHub spegne gli orari dopo 60 giorni
+# senza attivita'. I salvataggi ogni sei ore contano come attivita'; se mai
+# arrivasse la mail «scheduled workflow disabled», si riaccende da Actions →
+# «Stato del sito» → Enable workflow.
+# =============================================================================
+name: Stato del sito
+
+on:
+  schedule:
+    - cron: '3-59/10 * * * *'
+  workflow_dispatch:
+
+# i permessi minimi: scrivere stato.json nel repository (contents) e
+# pubblicare le pagine (pages + id-token). Nient'altro.
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# due giri alla volta no: si pesterebbero i piedi su stato.json
+concurrency:
+  group: stato-del-sito
+  cancel-in-progress: false
+
+jobs:
+  controlla:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment:
+      name: github-pages
+      url: ${{ steps.pubblica.outputs.page_url }}
+    steps:
+      - name: Prendi i file del repository
+        uses: actions/checkout@v6
+
+      - name: Node 22
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Dove sta la pagina pubblicata
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Chiedi al sito come sta
+        id: controllo
+        env:
+          # l'indirizzo del sito da controllare
+          VH_STATO_URL: https://adigela.it
+          # la pagina gia' pubblicata: da qui si rilegge lo storico fresco
+          VH_STATO_PRIMA: ${{ steps.pages.outputs.base_url }}/stato.json
+          VH_STATO_USCITA: _site
+        run: node controlla.mjs
+
+      - name: Salva lo storico (solo se e' cambiato qualcosa)
+        if: steps.controllo.outputs.salva == 'si'
+        # se il salvataggio non riesce (per esempio qualcuno sta cambiando un file
+        # proprio adesso) la pagina si pubblica lo stesso: lo storico lo
+        # rilegge il giro dopo dalla pagina pubblicata
+        continue-on-error: true
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add stato.json
+          if git diff --cached --quiet; then echo 'Niente da salvare.'; exit 0; fi
+          git commit -m "Stato del sito: ${{ steps.controllo.outputs.stato }}"
+          git pull --rebase --autostash || true
+          git push
+
+      - name: Prepara la pagina
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - name: Pubblica su GitHub Pages
+        id: pubblica
+        uses: actions/deploy-pages@v4
