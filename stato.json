@@ -1,12 +1,12 @@
 {
  "versione": 1,
  "indirizzo": "https://adigela.it",
- "controllato": "2026-10-20T08:16:37.718Z",
+ "controllato": "2026-10-20T17:57:57.202Z",
  "stato": "ok",
  "dettaglio": "Ha risposto in 0,7 secondi.",
- "ms": 676,
+ "ms": 674,
  "daQuando": "2026-10-20T08:16:37.718Z",
- "ultimaBene": "2026-10-20T08:16:37.718Z",
+ "ultimaBene": "2026-10-20T17:57:57.202Z",
  "ricordo": {
   "titolo": "Chiesa Cristiana Evangelica ADI Gela",
   "titoloBreve": "Chiesa Cristiana Evangelica ADI Gela",
@@ -71,10 +71,12 @@
    "diretta": "https://www.youtube.com/channel/UCQtq1nEKDXHNEKeno17YBrw/live"
   },
   "aggiornatoYoutube": "2026-10-20T08:16:37.718Z",
-  "aggiornato": "2026-10-20T08:16:37.718Z"
+  "aggiornato": "2026-10-20T17:57:57.202Z"
  },
  "storia": [
-  [1792484197, "o", 676]
+  [1792484197, "o", 676],
+  [1792501419, "o", 532],
+  [1792519077, "o", 674]
  ],
- "salvato": "2026-10-20T08:16:37.718Z"
+ "salvato": "2026-10-20T17:57:57.202Z"
 }
