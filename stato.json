@@ -1,0 +1,80 @@
+{
+ "versione": 1,
+ "indirizzo": "https://adigela.it",
+ "controllato": "2026-10-20T08:16:37.718Z",
+ "stato": "ok",
+ "dettaglio": "Ha risposto in 0,7 secondi.",
+ "ms": 676,
+ "daQuando": "2026-10-20T08:16:37.718Z",
+ "ultimaBene": "2026-10-20T08:16:37.718Z",
+ "ricordo": {
+  "titolo": "Chiesa Cristiana Evangelica ADI Gela",
+  "titoloBreve": "Chiesa Cristiana Evangelica ADI Gela",
+  "canaleScelto": "ADI Gela",
+  "culti": [
+   {
+    "sede": "Chiesa ADI Gela — via L. Toulouse",
+    "indirizzo": "Via Toulouse, 5 Gela (CL)",
+    "orari": [
+     {
+      "giorno": "Domenica",
+      "ora": "18:30",
+      "tipo": "Culto di adorazione"
+     },
+     {
+      "giorno": "Martedì",
+      "ora": "19:00",
+      "tipo": "Riunione di preghiera"
+     },
+     {
+      "giorno": "Giovedì",
+      "ora": "19:00",
+      "tipo": "Studio biblico"
+     }
+    ]
+   },
+   {
+    "sede": "Chiesa ADI Gela — via Caronda",
+    "indirizzo": "Via Caronda, 36 Gela (CL)",
+    "orari": [
+     {
+      "giorno": "Domenica",
+      "ora": "18:00",
+      "tipo": "Culto di adorazione"
+     },
+     {
+      "giorno": "Martedì",
+      "ora": "19:00",
+      "tipo": "Riunione di preghiera"
+     },
+     {
+      "giorno": "Giovedì",
+      "ora": "19:00",
+      "tipo": "Studio biblico"
+     }
+    ]
+   }
+  ],
+  "facebook": [
+   {
+    "nome": "",
+    "url": "https://www.facebook.com/100064645994170"
+   },
+   {
+    "nome": "",
+    "url": "https://www.facebook.com/adigela.viacaronda"
+   }
+  ],
+  "youtube": {
+   "nome": "ADI Gela",
+   "canale": "https://www.youtube.com/channel/UCQtq1nEKDXHNEKeno17YBrw",
+   "diretta": "https://www.youtube.com/channel/UCQtq1nEKDXHNEKeno17YBrw/live"
+  },
+  "aggiornatoYoutube": "2026-10-20T08:16:37.718Z",
+  "aggiornato": "2026-10-20T08:16:37.718Z"
+ },
+ "storia": [
+  [1792484197, "o", 676]
+ ],
+ "salvato": "2026-10-20T08:16:37.718Z"
+}
