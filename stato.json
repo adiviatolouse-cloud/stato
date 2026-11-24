@@ -1,12 +1,12 @@
 {
  "versione": 1,
  "indirizzo": "https://adigela.it",
- "controllato": "2026-11-23T13:16:44.543Z",
+ "controllato": "2026-11-24T01:01:36.775Z",
  "stato": "ok",
- "dettaglio": "Ha risposto in 0,6 secondi.",
- "ms": 631,
+ "dettaglio": "Ha risposto in 0,8 secondi.",
+ "ms": 756,
  "daQuando": "2026-11-13T21:28:39.690Z",
- "ultimaBene": "2026-11-23T13:16:44.543Z",
+ "ultimaBene": "2026-11-24T01:01:36.775Z",
  "ricordo": {
   "titolo": "Chiesa Cristiana Evangelica ADI Gela",
   "titoloBreve": "Chiesa Cristiana Evangelica ADI Gela",
@@ -70,18 +70,17 @@
    "canale": "https://www.youtube.com/channel/UCQtq1nEKDXHNEKeno17YBrw",
    "diretta": "https://www.youtube.com/channel/UCQtq1nEKDXHNEKeno17YBrw/live"
   },
-  "aggiornatoYoutube": "2026-11-22T17:45:10.251Z",
-  "aggiornato": "2026-11-23T13:16:44.543Z"
+  "aggiornatoYoutube": "2026-11-24T01:01:36.775Z",
+  "aggiornato": "2026-11-24T01:01:36.775Z"
  },
  "storia": [
-  [1795282182, "o", 696],
-  [1795299531, "o", 785],
   [1795314126, "o", 689],
   [1795341578, "o", 724],
   [1795369510, "o", 921],
   [1795387874, "o", 802],
   [1795403967, "o", 630],
-  [1795439804, "o", 631]
+  [1795439804, "o", 631],
+  [1795482096, "o", 756]
  ],
- "salvato": "2026-11-23T13:16:44.543Z"
+ "salvato": "2026-11-24T01:01:36.775Z"
 }
